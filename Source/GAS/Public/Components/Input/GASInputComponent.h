@@ -21,7 +21,7 @@ public:
 		const  TObjectPtr<UDataAsset_InputConfig> InInputConfig,
 		const FGameplayTag& InInputTag,
 		ETriggerEvent TriggerEvent,
-		TObjectPtr<UserObject> ContextObject,
+		UserObject* ContextObject,
 		CallbackFunc Func);
 };
 
@@ -30,7 +30,7 @@ inline void UGASInputComponent::BindNativeInputAction(
 	const TObjectPtr<UDataAsset_InputConfig> InInputConfig,
 	const FGameplayTag& InInputTag,
 	ETriggerEvent TriggerEvent,
-	TObjectPtr<UserObject> ContextObject,
+	UserObject* ContextObject,
 	CallbackFunc Func)
 {
 	checkf(InInputConfig, TEXT("Input Config data asset is null, can not proceed with binding"));

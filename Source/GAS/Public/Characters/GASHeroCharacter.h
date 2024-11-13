@@ -5,16 +5,17 @@
 #include "CoreMinimal.h"
 #include "Characters/GASBaseCharacter.h"
 #include "Camera/CameraComponent.h"
-#include "Components/CapsuleComponent.h"
 #include "GameFramework/SpringArmComponent.h"
-#include "GameFramework/CharacterMovementComponent.h"
 #include "GASHeroCharacter.generated.h"
 
+struct FInputActionValue;
 /**
  * 
  */
 class USpringArmComponent; 
 class UCameraComponent;
+class UDataAsset_InputConfig;
+struct UInputActionValue;
 
 UCLASS()
 class GAS_API AGASHeroCharacter : public AGASBaseCharacter
@@ -25,6 +26,7 @@ public:
 	AGASHeroCharacter();
 	
 protected:
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	virtual void BeginPlay() override;
 
 private:
@@ -38,4 +40,13 @@ private:
 	
 #pragma endregion
 
+#pragma region Inputs
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character", meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UDataAsset_InputConfig> InputConfigDataAsset;
+
+	void Input_Move(const FInputActionValue& InputActionValue);
+	void Input_Look(const FInputActionValue& InputActionValue);
+
+#pragma endregion
 };
