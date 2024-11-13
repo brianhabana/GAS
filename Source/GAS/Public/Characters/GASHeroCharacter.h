@@ -13,5 +13,7 @@ UCLASS()
 class GAS_API AGASHeroCharacter : public AGASBaseCharacter
 {
 	GENERATED_BODY()
-	
+
+protected:
+	virtual void BeginPlay() override;
 };
