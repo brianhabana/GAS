@@ -1,5 +1,4 @@
-
-// All Rights Reserver River & Rain Productions
+// All Rights Reserved River & Rain Productions
 
 
 #include "Components/Input/GASInputComponent.h"

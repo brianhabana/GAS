@@ -1,4 +1,4 @@
-// Copyright River & Rain
+// All Rights Reserved River & Rain Productions
 
 #pragma once
 

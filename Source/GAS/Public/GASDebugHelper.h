@@ -1,4 +1,6 @@
-﻿#pragma once
+﻿// All Rights Reserved River & Rain Productions
+
+#pragma once
 
 namespace Debug
 {

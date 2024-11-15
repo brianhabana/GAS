@@ -1,4 +1,4 @@
-// All Rights Reserver River & Rain Productions
+// All Rights Reserved River & Rain Productions
 
 
 #include "DataAssets/Input/DataAsset_InputConfig.h"
