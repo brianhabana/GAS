@@ -2,6 +2,8 @@
 
 
 #include "Characters/GASBaseCharacter.h"
+#include "AbilitySystem/GASAbilitySystemComponent.h"
+#include "AbilitySystem/GASAttributeSet.h"
 
 AGASBaseCharacter::AGASBaseCharacter()
 {
@@ -9,4 +11,23 @@ AGASBaseCharacter::AGASBaseCharacter()
 	PrimaryActorTick.bStartWithTickEnabled = false;
 
 	GetMesh()->bReceivesDecals;
+
+	GasAbilitySystemComponent = CreateDefaultSubobject<UGASAbilitySystemComponent>(TEXT("GasAbilitySystemComponent"));
+	GasAttributeSet = CreateDefaultSubobject<UGASAttributeSet>(TEXT("GasAttributeSet"));
+}
+
+UAbilitySystemComponent* AGASBaseCharacter::GetAbilitySystemComponent() const
+{
+	return GetGasAbilitySystemComponent();
+}
+
+void AGASBaseCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	if(GasAbilitySystemComponent)
+	{
+		GasAbilitySystemComponent->InitAbilityActorInfo(this,this);
+	}
+		
 }

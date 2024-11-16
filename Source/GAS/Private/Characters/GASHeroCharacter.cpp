@@ -9,6 +9,8 @@
 #include "DataAssets/Input/DataAsset_InputConfig.h"
 #include "Components/Input/GASInputComponent.h"
 #include "GASGameplayTags.h"
+#include "AbilitySystem/GASAbilitySystemComponent.h"
+
 #include "GASDebugHelper.h"
 
 AGASHeroCharacter::AGASHeroCharacter()
@@ -40,6 +42,21 @@ AGASHeroCharacter::AGASHeroCharacter()
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f; // Configure the deceleration when the character stops
 }
 
+void AGASHeroCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	if (GasAbilitySystemComponent && GasAttributeSet)
+	{
+		const FString ASCText = FString::Printf(TEXT("Owner Actor: %s, AvatarActor: %s"),
+			*GasAbilitySystemComponent->GetOwnerActor()->GetActorLabel(),
+			*GasAbilitySystemComponent->GetAvatarActor()->GetActorLabel());
+		
+		Debug::Printf(TEXT("Ability System Component is valid.") + ASCText, FColor::Green);
+		Debug::Printf(TEXT("AttributeSet is valid.") + ASCText,FColor::Green);
+	}
+}
+
 void AGASHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	checkf(InputConfigDataAsset, TEXT("Forgot to assign a valid data asset as input config"))
@@ -69,7 +86,6 @@ void AGASHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 void AGASHeroCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	Debug::Printf(TEXT("Working!"));
 }
 
 void AGASHeroCharacter::Input_Move(const FInputActionValue& InputActionValue)
@@ -106,6 +122,4 @@ void AGASHeroCharacter::Input_Look(const FInputActionValue& InputActionValue)
 	{
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
-
-
 }
