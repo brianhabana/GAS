@@ -2,6 +2,7 @@
 
 #include "AbilitySystem/Abilities/GASGameplayAbility.h"
 #include "AbilitySystem/GASAbilitySystemComponent.h"
+#include "Components/combat/PawnCombatComponent.h"
 
 void UGASGameplayAbility::OnGiveAbility(
 	const FGameplayAbilityActorInfo* ActorInfo,
@@ -34,4 +35,10 @@ void UGASGameplayAbility::EndAbility(
 			ActorInfo->AbilitySystemComponent->ClearAbility(Handle);
 		}
 	}
+	
+}
+
+UPawnCombatComponent* UGASGameplayAbility::GetPawnCombatComponentFromActorInfo() const
+{
+	return GetAvatarActorFromActorInfo()->FindComponentByClass<UPawnCombatComponent>();
 }

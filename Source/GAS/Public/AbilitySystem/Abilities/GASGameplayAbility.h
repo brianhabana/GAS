@@ -6,6 +6,8 @@
 #include "Abilities/GameplayAbility.h"
 #include "GASGameplayAbility.generated.h"
 
+class UPawnCombatComponent;
+
 UENUM(BlueprintType)
 enum class EGasAbilityActivationPolicy : uint8
 {
@@ -36,5 +38,8 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "HeroAbility")
 	EGasAbilityActivationPolicy AbilityActivationPolicy = EGasAbilityActivationPolicy::OnTriggered;
+
+	UFUNCTION(BlueprintPure, Category = "Hero|Ability")
+	UPawnCombatComponent* GetPawnCombatComponentFromActorInfo() const;
 };
 
