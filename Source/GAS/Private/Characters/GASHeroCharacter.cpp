@@ -11,6 +11,7 @@
 #include "GASGameplayTags.h"
 #include "AbilitySystem/GASAbilitySystemComponent.h"
 #include "DataAssets/StartUpData/DataAsset_HeroStartUpData.h"
+#include "Components/Combat/HeroCombatComponent.h"
 #include "GASDebugHelper.h"
 
 AGASHeroCharacter::AGASHeroCharacter()
@@ -25,21 +26,23 @@ AGASHeroCharacter::AGASHeroCharacter()
 
 	// Create and configure the camera boom (spring arm)
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
-	CameraBoom->SetupAttachment(GetRootComponent()); // Attach camera boom to root component
-	CameraBoom->TargetArmLength = 200.f; // Set the camera boom distance from the character
-	CameraBoom->SocketOffset = FVector(0.f, 55.f, 65.f); // Set an offset for the camera position
-	CameraBoom->bUsePawnControlRotation = true; // Rotate the arm based on controller input
+	CameraBoom->SetupAttachment(GetRootComponent()); 
+	CameraBoom->TargetArmLength = 200.f; 
+	CameraBoom->SocketOffset = FVector(0.f, 55.f, 65.f); 
+	CameraBoom->bUsePawnControlRotation = true;
 
 	// Create and configure the follow camera
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
-	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach camera to end of camera boom
-	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate based on controller
+	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); 
+	FollowCamera->bUsePawnControlRotation = false; 
 
 	// Configure character movement settings
-	GetCharacterMovement()->bOrientRotationToMovement = true; // Character moves in direction of input
-	GetCharacterMovement()->RotationRate = FRotator(0.f, 500.f, 0.f); // Configure the character's rotation speed
-	GetCharacterMovement()->MaxWalkSpeed = 400.f; // Configure the character's walking speed
-	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f; // Configure the deceleration when the character stops
+	GetCharacterMovement()->bOrientRotationToMovement = true; 
+	GetCharacterMovement()->RotationRate = FRotator(0.f, 500.f, 0.f); 
+	GetCharacterMovement()->MaxWalkSpeed = 400.f; 
+	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f; 
+
+	HeroCombatComponent = CreateDefaultSubobject<UHeroCombatComponent>(TEXT("CombatComponent"));
 }
 
 void AGASHeroCharacter::PossessedBy(AController* NewController)

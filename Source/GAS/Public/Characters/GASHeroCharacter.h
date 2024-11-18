@@ -16,6 +16,7 @@ class USpringArmComponent;
 class UCameraComponent;
 class UDataAsset_InputConfig;
 struct UInputActionValue;
+class UHeroCombatComponent;
 
 UCLASS()
 class GAS_API AGASHeroCharacter : public AGASBaseCharacter
@@ -41,6 +42,9 @@ private:
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UCameraComponent> FollowCamera;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Combat", meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UHeroCombatComponent> HeroCombatComponent;
 	
 #pragma endregion
 
@@ -53,4 +57,7 @@ private:
 	void Input_Look(const FInputActionValue& InputActionValue);
 
 #pragma endregion
+
+public:
+	FORCEINLINE TObjectPtr<UHeroCombatComponent>  GetHeroCombatComponent() const {return HeroCombatComponent;}
 };
