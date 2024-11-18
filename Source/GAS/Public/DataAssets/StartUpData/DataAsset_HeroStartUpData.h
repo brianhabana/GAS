@@ -10,7 +10,7 @@
  * 
  */
 UCLASS()
-class GAS_API UMyDataAsset_HeroStartUpData : public UDataAsset_StartUpDataBase
+class GAS_API UDataAsset_HeroStartUpData : public UDataAsset_StartUpDataBase
 {
 	GENERATED_BODY()
 	

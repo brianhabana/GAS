@@ -10,7 +10,7 @@
 #include "Components/Input/GASInputComponent.h"
 #include "GASGameplayTags.h"
 #include "AbilitySystem/GASAbilitySystemComponent.h"
-
+#include "DataAssets/StartUpData/DataAsset_HeroStartUpData.h"
 #include "GASDebugHelper.h"
 
 AGASHeroCharacter::AGASHeroCharacter()
@@ -46,14 +46,12 @@ void AGASHeroCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
 
-	if (GasAbilitySystemComponent && GasAttributeSet)
+	if (!CharacterStartupData.IsNull())
 	{
-		const FString ASCText = FString::Printf(TEXT("Owner Actor: %s, AvatarActor: %s"),
-			*GasAbilitySystemComponent->GetOwnerActor()->GetActorLabel(),
-			*GasAbilitySystemComponent->GetAvatarActor()->GetActorLabel());
-		
-		Debug::Printf(TEXT("Ability System Component is valid.") + ASCText, FColor::Green);
-		Debug::Printf(TEXT("AttributeSet is valid.") + ASCText,FColor::Green);
+		if (TObjectPtr<UDataAsset_StartUpDataBase> LoadedData = CharacterStartupData.LoadSynchronous())
+		{
+			LoadedData->GiveToAbilitySystemComponent(GasAbilitySystemComponent);
+		}
 	}
 }
 

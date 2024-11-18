@@ -9,6 +9,8 @@
 
 class UGASAbilitySystemComponent;
 class UGASAttributeSet;
+class UDataAsset_StartUpDataBase;
+
 UCLASS()
 class GAS_API AGASBaseCharacter : public ACharacter, public IAbilitySystemInterface
 {
@@ -18,7 +20,7 @@ public:
 	AGASBaseCharacter();
 
 	//~ Begin IAbilitySystemInterface Interface.
-	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const;
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	//~ End IAbilitySystemInterface Interface
 
 protected:
@@ -32,6 +34,9 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "AbilitySystem")
 	TObjectPtr<UGASAttributeSet> GasAttributeSet;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CharacterData")
+	TSoftObjectPtr<UDataAsset_StartUpDataBase> CharacterStartupData;
+	
 public:
 	FORCEINLINE TObjectPtr<UGASAbilitySystemComponent> GetGasAbilitySystemComponent() const { return GasAbilitySystemComponent;}
 	FORCEINLINE TObjectPtr<UGASAttributeSet> GetAttributeSet() const { return GasAttributeSet;}

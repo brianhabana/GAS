@@ -46,7 +46,7 @@ private:
 
 #pragma region Inputs
 	
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Character", meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CharacterData", meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UDataAsset_InputConfig> InputConfigDataAsset;
 
 	void Input_Move(const FInputActionValue& InputActionValue);

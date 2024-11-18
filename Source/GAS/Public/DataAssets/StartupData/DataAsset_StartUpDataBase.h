@@ -17,17 +17,18 @@ class GAS_API UDataAsset_StartUpDataBase : public UDataAsset
 	GENERATED_BODY()
 
 public:
-	virtual void GiveToAbilitySystemComponent(UGASAbilitySystemComponent* InGasASCToGive, int32 ApplyLevel = 1);
+	virtual void GiveToAbilitySystemComponent(TObjectPtr<UGASAbilitySystemComponent> InASCToGive, int32 ApplyLevel = 1);
 	
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "StartUpData")
-	TArray< TSubclassOf< UGASGameplayAbility > > ActivateOnGivenAbilities;
+	TArray< TSubclassOf < UGASGameplayAbility > > ActivateOnGivenAbilities;
 
 	UPROPERTY(EditDefaultsOnly, Category = "StartUpData")
-	TArray< TSubclassOf< UGASGameplayAbility > > ReactiveAbilities;
+	TArray< TSubclassOf < UGASGameplayAbility > > ReactiveAbilities;
 
 	void GrantAbilities(
-		const TArray< TSubclassOf< UGASGameplayAbility > >& InAbilitiesToGive,
-		UGASAbilitySystemComponent* InGasASCToGive,
-		int32 ApplyLevel = 1 );
+		const TArray< TSubclassOf < UGASGameplayAbility > >& InAbilitiesToGive,
+		TObjectPtr<UGASAbilitySystemComponent> InASCToGive,
+		int32 ApplyLevel = 1
+		);
 };

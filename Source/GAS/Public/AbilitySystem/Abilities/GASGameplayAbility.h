@@ -32,7 +32,6 @@ protected:
 		const FGameplayAbilityActivationInfo ActivationInfo,
 		bool bReplicateEndAbility,
 		bool bWasCancelled) override;
-	
 	//~ End UGameplayAbility Interface
 
 	UPROPERTY(EditDefaultsOnly, Category = "HeroAbility")

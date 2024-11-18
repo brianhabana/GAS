@@ -4,17 +4,19 @@
 #include "AbilitySystem/GASAbilitySystemComponent.h"
 #include "AbilitySystem/Abilities/GASGameplayAbility.h"
 
-void UDataAsset_StartUpDataBase::GiveToAbilitySystemComponent(TObjectPtr<UGASAbilitySystemComponent> InGasASCToGive,
+void UDataAsset_StartUpDataBase::GiveToAbilitySystemComponent(TObjectPtr<UGASAbilitySystemComponent> InASCToGive,
 	int32 ApplyLevel)
 {
-	check(InGasASCToGive);
+	check(InASCToGive);
 
-	GrantAbilities(ActivateOnGivenAbilities, InGasASCToGive, ApplyLevel);
-	GrantAbilities(ActivateOnGivenAbilities, InGasASCToGive, ApplyLevel);
+	GrantAbilities(ActivateOnGivenAbilities, InASCToGive, ApplyLevel);
+	GrantAbilities(ReactiveAbilities, InASCToGive, ApplyLevel);
 }
 
-void UDataAsset_StartUpDataBase::GrantAbilities(const TArray<TSubclassOf<UGASGameplayAbility>>& InAbilitiesToGive,
-	TObjectPtr<UGASAbilitySystemComponent> InGasASCToGive, int32 ApplyLevel)
+void UDataAsset_StartUpDataBase::GrantAbilities(
+	const TArray<TSubclassOf<UGASGameplayAbility>>& InAbilitiesToGive,
+	TObjectPtr<UGASAbilitySystemComponent> InASCToGive, 
+	int32 ApplyLevel)
 {
 	if (InAbilitiesToGive.IsEmpty())
 	{
@@ -26,9 +28,9 @@ void UDataAsset_StartUpDataBase::GrantAbilities(const TArray<TSubclassOf<UGASGam
 		if (!Ability) continue;
 
 		FGameplayAbilitySpec AbilitySpec(Ability);
-
-		AbilitySpec.SourceObject = InGasASCToGive->GetAvatarActor();
+		AbilitySpec.SourceObject = InASCToGive->GetAvatarActor();
 		AbilitySpec.Level = ApplyLevel;
-		InGasASCToGive->GiveAbility(AbilitySpec);
+		
+		InASCToGive->GiveAbility(AbilitySpec);
 	}
 }

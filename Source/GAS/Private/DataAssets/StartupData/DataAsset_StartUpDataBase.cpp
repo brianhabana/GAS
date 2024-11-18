@@ -1,23 +1,21 @@
 // All Rights Reserved River & Rain Productions
 
-
-#include "DataAssets/StartupData/DataAsset_StartUpDataBase.h"
+#include "DataAssets/StartUpData/DataAsset_StartUpDataBase.h"
 #include "AbilitySystem/GASAbilitySystemComponent.h"
 #include "AbilitySystem/Abilities/GASGameplayAbility.h"
 
-void UDataAsset_StartUpDataBase::GiveToAbilitySystemComponent(UGASAbilitySystemComponent* InGasASCToGive,
+void UDataAsset_StartUpDataBase::GiveToAbilitySystemComponent(TObjectPtr<UGASAbilitySystemComponent> InASCToGive,
 	int32 ApplyLevel)
 {
-	check(InGasASCToGive);
+	check(InASCToGive);
 
-	GrantAbilities(ActivateOnGivenAbilities, InGasASCToGive, ApplyLevel);
-	GrantAbilities(ReactiveAbilities, InGasASCToGive, ApplyLevel);	
-
+	GrantAbilities(ActivateOnGivenAbilities, InASCToGive, ApplyLevel);
+	GrantAbilities(ReactiveAbilities, InASCToGive, ApplyLevel);
 }
 
 void UDataAsset_StartUpDataBase::GrantAbilities(
 	const TArray<TSubclassOf<UGASGameplayAbility>>& InAbilitiesToGive,
-	UGASAbilitySystemComponent* InGasASCToGive,
+	TObjectPtr<UGASAbilitySystemComponent> InASCToGive, 
 	int32 ApplyLevel)
 {
 	if (InAbilitiesToGive.IsEmpty())
@@ -27,11 +25,12 @@ void UDataAsset_StartUpDataBase::GrantAbilities(
 
 	for(const TSubclassOf<UGASGameplayAbility>& Ability : InAbilitiesToGive)
 	{
-		if(!Ability) continue;
+		if (!Ability) continue;
 
 		FGameplayAbilitySpec AbilitySpec(Ability);
-		AbilitySpec.SourceObject = InGasASCToGive->GetAvatarActor();
+		AbilitySpec.SourceObject = InASCToGive->GetAvatarActor();
 		AbilitySpec.Level = ApplyLevel;
-		InGasASCToGive->GiveAbility(AbilitySpec);
+		
+		InASCToGive->GiveAbility(AbilitySpec);
 	}
 }

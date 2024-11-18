@@ -28,6 +28,7 @@ void AGASBaseCharacter::PossessedBy(AController* NewController)
 	if(GasAbilitySystemComponent)
 	{
 		GasAbilitySystemComponent->InitAbilityActorInfo(this,this);
+
+		ensureMsgf(!CharacterStartupData.IsNull(), TEXT("Forogt to assign start up data to %s"), *GetName());
 	}
-		
 }
