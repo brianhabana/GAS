@@ -17,7 +17,9 @@ class GAS_API UDataAsset_StartUpDataBase : public UDataAsset
 	GENERATED_BODY()
 
 public:
-	virtual void GiveToAbilitySystemComponent(TObjectPtr<UGASAbilitySystemComponent> InASCToGive, int32 ApplyLevel = 1);
+	virtual void GiveToAbilitySystemComponent(
+		TObjectPtr<UGASAbilitySystemComponent> InASCToGive,
+		int32 ApplyLevel = 1);
 	
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "StartUpData")
