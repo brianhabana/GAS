@@ -7,6 +7,7 @@
 #include "GASGameplayAbility.generated.h"
 
 class UPawnCombatComponent;
+class UGASAbilitySystemComponent;
 
 UENUM(BlueprintType)
 enum class EGasAbilityActivationPolicy : uint8
@@ -41,5 +42,8 @@ protected:
 
 	UFUNCTION(BlueprintPure, Category = "Hero|Ability")
 	UPawnCombatComponent* GetPawnCombatComponentFromActorInfo() const;
+
+	UFUNCTION(BlueprintPure, Category = "Hero|Ability")
+	UGASAbilitySystemComponent* GetGASAbilitySystemComponentFromActorInfo() const;
 };
 

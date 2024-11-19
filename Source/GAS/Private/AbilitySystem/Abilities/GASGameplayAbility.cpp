@@ -42,3 +42,8 @@ UPawnCombatComponent* UGASGameplayAbility::GetPawnCombatComponentFromActorInfo()
 {
 	return GetAvatarActorFromActorInfo()->FindComponentByClass<UPawnCombatComponent>();
 }
+
+UGASAbilitySystemComponent* UGASGameplayAbility::GetGASAbilitySystemComponentFromActorInfo() const
+{
+	return Cast<UGASAbilitySystemComponent>(CurrentActorInfo->AbilitySystemComponent);
+}
