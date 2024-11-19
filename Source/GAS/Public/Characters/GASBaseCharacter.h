@@ -29,15 +29,15 @@ protected:
 	//~ End APawn Interface
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "AbilitySystem")
-	TObjectPtr<UGASAbilitySystemComponent> GasAbilitySystemComponent;
+	TObjectPtr<UGASAbilitySystemComponent> GASAbilitySystemComponent;
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "AbilitySystem")
-	TObjectPtr<UGASAttributeSet> GasAttributeSet;
+	TObjectPtr<UGASAttributeSet> GASAttributeSet;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CharacterData")
 	TSoftObjectPtr<UDataAsset_StartUpDataBase> CharacterStartupData;
 	
 public:
-	FORCEINLINE TObjectPtr<UGASAbilitySystemComponent> GetGasAbilitySystemComponent() const { return GasAbilitySystemComponent;}
-	FORCEINLINE TObjectPtr<UGASAttributeSet> GetAttributeSet() const { return GasAttributeSet;}
+	FORCEINLINE TObjectPtr<UGASAbilitySystemComponent> GetGasAbilitySystemComponent() const { return GASAbilitySystemComponent;}
+	FORCEINLINE TObjectPtr<UGASAttributeSet> GetAttributeSet() const { return GASAttributeSet;}
 };

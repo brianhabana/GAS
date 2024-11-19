@@ -53,7 +53,7 @@ void AGASHeroCharacter::PossessedBy(AController* NewController)
 	{
 		if (TObjectPtr<UDataAsset_StartUpDataBase> LoadedData = CharacterStartupData.LoadSynchronous())
 		{
-			LoadedData->GiveToAbilitySystemComponent(GasAbilitySystemComponent);
+			LoadedData->GiveToAbilitySystemComponent(GASAbilitySystemComponent);
 		}
 	}
 }
@@ -73,14 +73,22 @@ void AGASHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 		GASInputComponent->BindNativeInputAction(
 			InputConfigDataAsset,
 			GASGameplayTags::InputTag_Move,
-			ETriggerEvent::Triggered, this,
+			ETriggerEvent::Triggered,
+			this,
 			&ThisClass::Input_Move);
 
 		GASInputComponent->BindNativeInputAction(
 			InputConfigDataAsset,
 			GASGameplayTags::InputTag_Look,
-			ETriggerEvent::Triggered, this,
+			ETriggerEvent::Triggered,
+			this,
 			&ThisClass::Input_Look);
+
+		GASInputComponent->BindAbilityInputAction(
+			InputConfigDataAsset,
+			 this,
+			 &ThisClass::Input_AbilityInputPressed,
+			 &ThisClass::Input_AbilityInputReleased);
 	}
 }
 
@@ -123,4 +131,14 @@ void AGASHeroCharacter::Input_Look(const FInputActionValue& InputActionValue)
 	{
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
+}
+
+void AGASHeroCharacter::Input_AbilityInputPressed(FGameplayTag InInputTag)
+{
+	GASAbilitySystemComponent->OnAbilityInputPressed(InInputTag);
+}
+
+void AGASHeroCharacter::Input_AbilityInputReleased(FGameplayTag InInputTag)
+{
+	GASAbilitySystemComponent->OnAbilityInputReleased(InInputTag);
 }

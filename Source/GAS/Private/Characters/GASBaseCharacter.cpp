@@ -12,8 +12,8 @@ AGASBaseCharacter::AGASBaseCharacter()
 
 	GetMesh()->bReceivesDecals;
 
-	GasAbilitySystemComponent = CreateDefaultSubobject<UGASAbilitySystemComponent>(TEXT("GasAbilitySystemComponent"));
-	GasAttributeSet = CreateDefaultSubobject<UGASAttributeSet>(TEXT("GasAttributeSet"));
+	GASAbilitySystemComponent = CreateDefaultSubobject<UGASAbilitySystemComponent>(TEXT("GasAbilitySystemComponent"));
+	GASAttributeSet = CreateDefaultSubobject<UGASAttributeSet>(TEXT("GasAttributeSet"));
 }
 
 UAbilitySystemComponent* AGASBaseCharacter::GetAbilitySystemComponent() const
@@ -25,9 +25,9 @@ void AGASBaseCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
 
-	if(GasAbilitySystemComponent)
+	if(GASAbilitySystemComponent)
 	{
-		GasAbilitySystemComponent->InitAbilityActorInfo(this,this);
+		GASAbilitySystemComponent->InitAbilityActorInfo(this,this);
 
 		ensureMsgf(!CharacterStartupData.IsNull(), TEXT("Forogt to assign start up data to %s"), *GetName());
 	}
