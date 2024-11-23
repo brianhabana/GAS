@@ -29,7 +29,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Hero|Combat")
 	AGASWeaponBase* GetCharacterCurrentEquippedWeapon() const;
 	
-	UPROPERTY(BlueprintReadOnly, Category = "Hero|Combat")
+	UPROPERTY(BlueprintReadWrite, Category = "Hero|Combat")
 	FGameplayTag CurrentEquippedWeaponTag;
 
 private:
