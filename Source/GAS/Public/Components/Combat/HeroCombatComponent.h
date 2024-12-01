@@ -13,5 +13,8 @@ UCLASS()
 class GAS_API UHeroCombatComponent : public UPawnCombatComponent
 {
 	GENERATED_BODY()
-	
+
+public:
+	UFUNCTION(BlueprintCallable, Category = "Hero|Combat")
+	AGASHeroWeapon* GetHeroCarriedByWeaponTag (FGameplayTag InWeaponTag) const;
 };
